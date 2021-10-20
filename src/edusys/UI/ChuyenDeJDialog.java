@@ -3,7 +3,6 @@ package EduSys.UI;
 import edusys.DAO.CourseDAO;
 import edusys.DAO.ThematicDAO;
 import edusys.Service.AuthService;
-import edusys.Service.HelperService;
 import edusys.Service.ImageService;
 import edusys.Service.MessageService;
 import edusys.Service.ValidateService;
@@ -110,6 +109,12 @@ public class ChuyenDeJDialog extends javax.swing.JFrame {
         tabs.addTab("Danh sách", jPanel1);
 
         jLabel2.setText("Mã chuyên đề");
+
+        txtMacd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMacdActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Tên chuyên đề");
 
@@ -356,6 +361,10 @@ public class ChuyenDeJDialog extends javax.swing.JFrame {
     private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastActionPerformed
         this.last();
     }//GEN-LAST:event_btnLastActionPerformed
+
+    private void txtMacdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMacdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMacdActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

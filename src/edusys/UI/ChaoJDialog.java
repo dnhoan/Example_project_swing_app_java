@@ -24,7 +24,7 @@ public class ChaoJDialog extends javax.swing.JFrame {
                 }
                 if (i == 100) {
                     this.dispose();
-                    new DangNhapJDialog().setVisible(true);
+                    new EduSysJFrame().setVisible(true);
                 }
             }
         });

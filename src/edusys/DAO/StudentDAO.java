@@ -14,6 +14,7 @@ public class StudentDAO extends EduSysDAO<Student, Integer> {
     String DELETE_STUDENT = "DELETE FROM HOCVIEN WHERE MAHV = ?";
     String INSERT_STUDENT = "INSERT INTO HOCVIEN (MAKH,MANH,DIEM)  VALUES (?,?,?)";
     String UPDATE_STUDENT = "UPDATE HOCVIEN SET DIEM = ? WHERE MAHV = ?";
+    String CHECK_LEARNER_IN_STUDENT = "SELECT * FROM HOCVIEN WHERE  MANH = ?";
 
     @Override
     public void insert(Student student) {
@@ -81,5 +82,10 @@ public class StudentDAO extends EduSysDAO<Student, Integer> {
     @Override
     public List<Student> selectAll() {
         return null;
+    }
+    
+    public boolean isLeanerInStudent(String manh) {
+         List<Student> studentsList = this.selectBySql(CHECK_LEARNER_IN_STUDENT, manh);
+        return studentsList.size() > 0;
     }
 }

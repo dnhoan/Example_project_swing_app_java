@@ -18,6 +18,8 @@ public class LearnerDAO extends EduSysDAO<Learner, String>{
     String SELECT_LEARNERS_NOT_IN_COURSE = "SELECT * FROM NGUOIHOC \n" +
                             "WHERE HOTEN LIKE ? AND\n" +
                             "MANH NOT IN  (SELECT MANH FROM HOCVIEN WHERE MAKH = ?)";
+    String DELETE_LEARNER_IN_STUDENT = "DELETE FROM HOCVIEN WHERE MANH IN (SELECT MANH FROM NGUOIHOC WHERE MANH like ?)\n" +
+"DELETE FROM NGUOIHOC WHERE MANH = ?";
     
     @Override
     public void insert(Learner learner) {
@@ -40,6 +42,13 @@ public class LearnerDAO extends EduSysDAO<Learner, String>{
         try {
             HelperService.update(DELETE_SQL, manh);
         } catch (SQLException e) {
+        }
+    }
+    
+    public void deleteLearnerInStudent(String manhNH, String manhHV) {
+        try {
+            HelperService.update(DELETE_LEARNER_IN_STUDENT, manhNH, manhHV);
+        } catch (Exception e) {
         }
     }
     

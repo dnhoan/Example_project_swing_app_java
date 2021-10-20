@@ -376,7 +376,8 @@ public class EduSysJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mniLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLogInActionPerformed
-        
+        new DangNhapJDialog().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_mniLogInActionPerformed
 
     private void mniLogOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniLogOutActionPerformed
@@ -578,6 +579,7 @@ public class EduSysJFrame extends javax.swing.JFrame {
     
     void exit() {
         if(MessageService.confirm(this, "Bạn muốn kết thúc làm việc?")){
+            AuthService.clear();
             System.exit(0);
         }
     }
@@ -623,13 +625,17 @@ public class EduSysJFrame extends javax.swing.JFrame {
     }
     void openStatistic(int tabIndex) {
         if(AuthService.isLogin()) {
-            if(tabIndex == 3 && !AuthService.isManager()) {
-                MessageService.alert(this, "Bạn không có quyền xem doanh thu");
-            } else {
-                ThongKeJdialog statistic = new ThongKeJdialog();
-                statistic.setVisible(true);
-                statistic.selectTab(tabIndex);
+            if(AuthService.isLogin()) {
+                if(tabIndex == 3 && !AuthService.isManager()) {
+                    MessageService.alert(this, "Bạn không có quyền xem doanh thu");
+                } else {
+                    ThongKeJdialog statistic = new ThongKeJdialog();
+                    statistic.setVisible(true);
+                    statistic.selectTab(tabIndex);
+                }
             }
+        } else {
+            MessageService.alert(this, "Vui lòng đăng nhập!");
         }
     }
     void openGuide() {
@@ -640,10 +646,6 @@ public class EduSysJFrame extends javax.swing.JFrame {
         }
     }
     void openAbout() {
-        if(AuthService.isLogin()) {
             new GioiThieuJDialog().setVisible(true);
-        } else {
-            MessageService.alert(this, "Vui lòng đăng nhập!");
-        }
     }
 }

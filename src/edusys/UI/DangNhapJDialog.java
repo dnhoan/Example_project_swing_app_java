@@ -167,6 +167,7 @@ public class DangNhapJDialog extends javax.swing.JFrame {
         } else if (!password.equals(employee.getMatKhau())) {
             MessageService.alert(this, "Sai mật khẩu");
         } else {
+            MessageService.alert(this, "Đăng nhập thành công");
             AuthService.user = employee;
             this.dispose();
             new EduSysJFrame().setVisible(true);

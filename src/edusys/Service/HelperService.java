@@ -1,7 +1,7 @@
 
 package edusys.Service;
 
-import edusys.model.Thematic;
+
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,7 +17,6 @@ public class HelperService {
         try {
             Class.forName(driver);
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
     

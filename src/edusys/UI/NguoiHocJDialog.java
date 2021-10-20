@@ -1,6 +1,7 @@
 package EduSys.UI;
 
 import edusys.DAO.LearnerDAO;
+import edusys.DAO.StudentDAO;
 import edusys.Service.AuthService;
 import edusys.Service.DateService;
 import edusys.Service.ImageService;
@@ -30,7 +31,6 @@ public class NguoiHocJDialog extends javax.swing.JFrame {
         tblLearner = new javax.swing.JTable();
         jPanel5 = new javax.swing.JPanel();
         txtSearch = new javax.swing.JTextField();
-        btnSearch = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtManh = new javax.swing.JTextField();
@@ -99,13 +99,6 @@ public class NguoiHocJDialog extends javax.swing.JFrame {
             }
         });
 
-        btnSearch.setText("Tìm");
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -113,20 +106,14 @@ public class NguoiHocJDialog extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtSearch)
-                .addGap(18, 18, 18)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch))
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-
-        jPanel5Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnSearch, txtSearch});
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -386,10 +373,6 @@ public class NguoiHocJDialog extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tblLearnerMouseClicked
 
-    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        fillTable();
-    }//GEN-LAST:event_btnSearchActionPerformed
-
     private void btnLastIndexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLastIndexActionPerformed
         this.last();
     }//GEN-LAST:event_btnLastIndexActionPerformed
@@ -473,7 +456,6 @@ public class NguoiHocJDialog extends javax.swing.JFrame {
     private javax.swing.JButton btnLastIndex;
     private javax.swing.JButton btnNextIndex;
     private javax.swing.JButton btnPreviousIndex;
-    private javax.swing.JButton btnSearch;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -503,6 +485,7 @@ public class NguoiHocJDialog extends javax.swing.JFrame {
     private javax.swing.JTextField txtSoDt;
     // End of variables declaration//GEN-END:variables
     LearnerDAO learnerDAO = new LearnerDAO();
+    StudentDAO studentDAO = new StudentDAO();
     int row = -1;
 
     void init() {
@@ -600,14 +583,27 @@ public class NguoiHocJDialog extends javax.swing.JFrame {
             MessageService.alert(this, "Bạn không có quyền xóa người học");
         } else {
             String manh = txtManh.getText();
-            if (MessageService.confirm(this, "Bạn có thực sự muốn xóa người học này không?")) {
-                try {
-                    learnerDAO.delete(manh);
-                    this.fillTable();
-                    this.clearForm();
-                    MessageService.alert(this, "Đã xóa người học!");
-                } catch (Exception e) {
-                    MessageService.alert(this, "Xóa thất bại");
+            if (this.studentDAO.isLeanerInStudent(manh)) {
+                if (MessageService.confirm(this, "Người học này đang có trong bảng học viên bạn có thực sự muốn xóa người học này không?")) {
+                    try {
+                        learnerDAO.deleteLearnerInStudent(manh, manh);
+                        this.fillTable();
+                        this.clearForm();
+                        MessageService.alert(this, "Đã xóa người học!");
+                    } catch (Exception e) {
+                        MessageService.alert(this, "Xóa thất bại");
+                    }
+                }
+            } else {
+                if (MessageService.confirm(this, "Bạn có thực sự muốn xóa người học này không?")) {
+                    try {
+                        learnerDAO.delete(manh);
+                        this.fillTable();
+                        this.clearForm();
+                        MessageService.alert(this, "Đã xóa người học!");
+                    } catch (Exception e) {
+                        MessageService.alert(this, "Xóa thất bại");
+                    }
                 }
             }
         }
