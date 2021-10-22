@@ -1,0 +1,28 @@
+#navbar-example2 {
+  background-color: transparent;
+}
+.container {
+  padding-top: 20px;
+}
+ul.navbar-nav {
+  flex-direction: row;
+}
+.navigation ul li {
+  margin: 0px 20px;
+}
+header {
+  display: flex;
+  align-items: center;
+  padding-top: 20px;
+}
+a {
+  color: rgb(9, 122, 197);
+  font-weight: bold;
+}
+a.dropdown-item {
+  color: rgb(9, 122, 197);
+}
+.logo img {
+  padding: 0px 30px;
+  height: 70px;
+}
