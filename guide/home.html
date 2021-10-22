@@ -23,8 +23,19 @@
           <li class="nav-item">
             <a class="nav-link" href="#home">Trang chủ</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#about">Hướng dẫn cài đặt</a>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="navbardrop"
+              data-toggle="dropdown"
+            >
+              Hướng dẫn
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#about">Hướng dẫn cài đặt</a>
+              <a class="dropdown-item" href="#use">Hướng dẫn sử dụng</a>
+            </div>
           </li>
           <!-- Dropdown -->
           <li class="nav-item dropdown">
@@ -80,8 +91,16 @@
       </div>
       <div>
         <h4 id="about">Hướng dẫn cài đặt</h4>
+        <p><b>Bước 1: </b>Chạy EduSys.sql để tạo CSDL EduSys</p>
+        <p><b>Bước 2: </b>Thiết lập tài khoản cho SQL SERVER với tài khoản: <b>user</b> và mật khẩu: <b>1234</b></p>
+        <p><b>Bước 3: </b>Chạy file Setup (chú ý môi trường JDK1.8+)</p>
+        <p><b>Bước 4: </b>Chạy ứng dụng và đăng nhập với tài khoản: <b>admin</b> và mật khẩu: <b>1234</b></p>
+        <p><b>Bước 5: </b>Cấp các tài khoản có vai trò là trưởng phòng</p>
+        <p><b>Bước 6: </b>Đăng nhập tài khoản mới và xóa tài khoản admin</p>
+        <p><b>Bước 7: </b>Xem hướng dẫn sử dụng trong menu trợ giúp của phần mềm</p>
       </div>
       <div>
+        <h4 id="use">Hướng dẫn sử dụng</h4>
         <h4 id="login">Đăng nhập</h4>
         <p><b>Bước 1: </b>Chọn tab hệ thống</p>
         <img src="./imageGuide/dangnhap/home.png" alt="menu" /> <br />
